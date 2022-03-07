@@ -78,8 +78,9 @@ typedef MathSymbolOnPress = void Function(MathSymbol symbol);
 class KeyPad extends StatefulWidget {
   final MathSymbolOnPress onPress;
   final KeyPadController controller;
+  final Color color;
 
-  const KeyPad({Key key, @required this.onPress, this.controller}) : super(key: key);
+  const KeyPad({Key key, @required this.onPress, this.controller, this.color}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _KeyPadState();
@@ -136,7 +137,8 @@ class _KeyPadState extends State<KeyPad> {
       );
 
       return FlatButton(
-        color: isClear ? theme.primaryColor : null,
+        // color: isClear ? theme.primaryColor : null,
+        color: isClear ? widget.color: null,
         shape: const CircleBorder(),
         onPressed: () => this.widget.onPress(symbol),
         child: pad,
@@ -191,7 +193,8 @@ class _KeyPadState extends State<KeyPad> {
 
     switch (symbol) {
       case MathSymbols.delete:
-        opPadColor = theme.primaryColor;
+      // opPadColor = theme.primaryColor;
+        opPadColor = widget.color;
         opPad = Text(
           symbol.text,
           style: TextStyle(color: theme.primaryTextTheme.title.color, fontSize: fontSize),
